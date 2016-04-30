@@ -41,7 +41,8 @@ ssd_optimizations()
 
     # Temporary directory to RAM
     log "RAM optimizations"
-    cat <<EOF > /tmp/fstab
+    cat <<EOF >> /etc/fstab
+
 # SSD optimizations
 tmpfs   /tmp                        tmpfs   defaults,size=2g    0   0
 tmpfs   /var/log                    tmpfs   defaults,nosuid,nodev,noatime,mode=0755,size=5%     0   0
@@ -49,7 +50,6 @@ tmpfs   /var/log                    tmpfs   defaults,nosuid,nodev,noatime,mode=0
 tmpfs   /home/$USERNAME/.cache      tmpfs   defaults,size=1g    0    0
 # end of optimizations
 EOF
-    mv -f /tmp/fstab /etc/fstab
     chmod 644 /etc/fstab
     aptitude clean
     rm -rf /tmp/* /var/log/* /var/cache/apt/archives/* /home/$USERNAME/.cache/*

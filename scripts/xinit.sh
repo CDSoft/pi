@@ -31,17 +31,17 @@ configure_xinit()
 #EOF
 #    chown $USERNAME:$USERNAME /home/$USERNAME/.Xmodmap
 
-    cat <<\EOF > /home/$USERNAME/.xinitrc
+    cat <<EOF > /home/$USERNAME/.xinitrc
 xset -b # disable bell
 #xset dpms 300 600 900
-#xrdb -merge $HOME/.Xresources
+#xrdb -merge \$HOME/.Xresources
 
 #dbus instance
 #eval `dbus-launch --sh-syntax --exit-with-session`
 
 setxkbmap -layout fr
 #setxkbmap -option ctrl:nocaps
-#xmodmap $HOME/.Xmodmap
+#xmodmap \$HOME/.Xmodmap
 #xbindkeys
 
 numlockx on
@@ -52,11 +52,11 @@ numlockx on
 dunst -key y &
 
 mkdir -p ~/.pw/
-cp -f ~/secret.pwd ~/.pw/$(date +%F-secret.pwd)
+cp -f ~/secret.pwd ~/.pw/\$(date +%F-secret.pwd)
 
 [ -x ~/bin/coffres.sh ] && ~/bin/coffres.sh
 
-xflux $XFLUX
+xflux $XFLUX &
 
 ~/.dropbox-dist/dropboxd &
 megasync > /tmp/megasync.log &
