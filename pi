@@ -1,0 +1,93 @@
+#!/bin/bash
+
+########################################################################
+# Post Install (pi): lightweigth Debian « distribution »
+#
+# Copyright (C) 2015, 2016 Christophe Delord
+# http://www.cdsoft.fr/pi
+#
+# This file is part of Post Install (PI)
+#
+# PI is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# PI is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with PI.  If not, see <http://www.gnu.org/licenses/>.
+########################################################################
+
+# Must be in a terminal
+if ! tty -s
+then
+    exec urxvt -e $0 $*
+    exec xterm -e $0 $*
+    echo "Can not open a terminal"
+    exit 1
+fi
+
+# Must be root
+if [ $UID -ne 0 ]
+then
+    exec sudo $0 $*
+    exec su -c $0 $*
+    echo "Can not get root permissions"
+    exit 1
+fi
+
+# Get user name
+USERNAME=$(awk -F : '$3 == 1000 {print $1}' /etc/passwd)
+if [ -z $USERNAME ] || ! [ -d /home/$USERNAME ]
+then
+    echo "Can not find user with user id 1000"
+    exit 1
+fi
+
+. scripts/functions.sh
+
+title "Post Install"
+
+. scripts/configuration.sh
+
+while [ -n "$1" ]
+do
+    case "$1" in
+        -f)     FORCE=true
+                ;;
+        *)      error "unknown option: $1"
+                ;;
+    esac
+done
+
+run_script packages
+run_script profile
+run_script hubic
+run_script dropbox
+run_script mega
+run_script haskell
+run_script ocaml
+run_script rust
+run_script atom
+run_script libreoffice
+run_script xflux
+run_script vim
+run_script system
+run_script ssd
+run_script network
+run_script brightness
+run_script bluetooth
+run_script autologin
+run_script autostartx
+run_script autofs
+run_script themes
+run_script i3
+run_script dunst
+run_script hcalc
+run_script bye
+run_script xinit
+run_script wallpaper
