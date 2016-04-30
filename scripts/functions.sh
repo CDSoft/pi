@@ -46,7 +46,7 @@ logrun()
     $*
 }
 
-PIDIR=$(realpath $(dirname $0))
+PIDIR=$(dirname $(readlink -f $0))
 
 run_script()
 {

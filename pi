@@ -48,6 +48,7 @@ then
     exit 1
 fi
 
+cd $(dirname $(readlink -f $0))
 . scripts/functions.sh
 
 title "Post Install"
