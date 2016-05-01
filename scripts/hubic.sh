@@ -24,16 +24,14 @@
 
 install_hubic()
 {
-    $HUBIC || return
+    [ -n "$HUBIC" ] || return
     $FORCE || ! [ -x /usr/bin/hubic ] || return
 
     title "Install Hubic"
-    (
-        cd /tmp
-        wget http://mir7.ovh.net/ovh-applications/hubic/hubiC-Linux/2.1.0/hubiC-Linux-2.1.0.53-linux.deb -O hubic.deb
-        dpkg -i hubic.deb
-        aptitude install -f
-    )
+    cd /tmp
+    wget "$HUBIC" -O hubic.deb
+    dpkg -i hubic.deb
+    aptitude install -f
 }
 
 install_hubic

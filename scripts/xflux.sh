@@ -25,6 +25,7 @@
 install_xflux()
 {
     [ -n "$XFLUX" ] || return
+    $I64 || return
 
     if $FORCE || ! [ -x /usr/bin/xflux ]
     then

@@ -24,15 +24,18 @@
 
 configure_hcalc()
 {
-    title "Install hcalc"
-    /home/$USERNAME/bin/hcalc version 2>/dev/null > /tmp/hcalc.installed
-    wget -O /tmp/hcalc http://cdsoft.fr/hcalc/hcalc 2>/dev/null
-    chmod +x /tmp/hcalc
-    /tmp/hcalc version 2>/dev/null > /tmp/hcalc.latest
-    if ! diff /tmp/hcalc.installed /tmp/hcalc.latest
+    if $I64
     then
-        cp -p /tmp/hcalc /home/$USERNAME/bin/hcalc
-        perm ux /home/$USERNAME/bin/hcalc
+        title "Install hcalc"
+        /home/$USERNAME/bin/hcalc version 2>/dev/null > /tmp/hcalc.installed
+        wget -O /tmp/hcalc http://cdsoft.fr/hcalc/hcalc 2>/dev/null
+        chmod +x /tmp/hcalc
+        /tmp/hcalc version 2>/dev/null > /tmp/hcalc.latest
+        if ! diff /tmp/hcalc.installed /tmp/hcalc.latest
+        then
+            cp -p /tmp/hcalc /home/$USERNAME/bin/hcalc
+            perm ux /home/$USERNAME/bin/hcalc
+        fi
     fi
 
 }

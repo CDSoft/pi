@@ -109,7 +109,6 @@ bindsym $mod+o          scratchpad show
 bindsym $mod+space              exec ~/bin/menu
 
 bindsym $mod+w                  exec chromium
-bindsym $mod+Shift+w            exec firefox
 bindsym $mod+t                  exec gvim ~/todo.txt
 bindsym $mod+n                  exec gvim ~/notes.txt
 bindsym $mod+p                  exec [ -e ~/secret.pwd ] && gvim ~/secret.pwd || gvim -x ~/secret.pwd
@@ -320,6 +319,11 @@ exec --no-startup-id volumeicon
 
 EOF
 
+    if $I32 || $RPI
+    then
+        sed -i '/hcalc/d' /home/$USERNAME/.i3/config
+    fi
+
     if ! which xcwd > /dev/null
     then
         log "Install xcwd"
@@ -472,6 +476,10 @@ EOF
         sed -i 's/#order += "wireless wlan0"/order += "wireless wlan0"/' /home/$USERNAME/.i3/status
         sed -i 's/#order += "battery 0"/order += "battery 0"/' /home/$USERNAME/.i3/status
     fi
+    if $RPI
+    then
+        sed -i 's/#order += "wireless wlan0"/order += "wireless wlan0"/' /home/$USERNAME/.i3/status
+    fi
 
     cat <<\EOF > /home/$USERNAME/.i3/status+.py
 #!/usr/bin/python
@@ -610,7 +618,6 @@ configure_menu()
 case $(awk '$1 ~ /\)$/ {print substr($1,1,length($1)-1)}' $0 | dmenu -i -b -p Menu) in
     mail)           icedove ;;
     web)            chromium ;;
-    firefox)        firefox ;;
     hoogle)         surf https://www.haskell.org/hoogle/ ;;
     scan)           simple-scan ;;
     calc)           urxvt +sb -T hCalc -e rlwrap ~/bin/hcalc ;;
@@ -618,19 +625,13 @@ case $(awk '$1 ~ /\)$/ {print substr($1,1,length($1)-1)}' $0 | dmenu -i -b -p Me
     libreoffice)    /usr/local/bin/libreoffice*.* ;;
 esac
 EOF
-    $LAPTOP && cat <<\EOF > /home/$USERNAME/bin/menu
-#!/bin/dash
-case $(awk '$1 ~ /\)$/ {print substr($1,1,length($1)-1)}' $0 | dmenu -i -b -p Menu) in
-    mail)           icedove ;;
-    web)            chromium ;;
-    firefox)        firefox ;;
-    hoogle)         surf https://www.haskell.org/hoogle/ ;;
-    calc)           urxvt +sb -T hCalc -e rlwrap ~/bin/hcalc ;;
-    vlc)            vlc ;;
-esac
-EOF
     which simple-scan > /dev/null || sed -i '/simple-scan/d' /home/$USERNAME/bin/menu
     which libreoffice > /dev/null || sed -i '/libreoffice/d' /home/$USERNAME/bin/menu
+    if $I32 || $RPI
+    then
+        sed -i '/icedove/d' /home/$USERNAME/bin/menu
+        sed -i '/hcalc/d' /home/$USERNAME/bin/menu
+    fi
     perm ux /home/$USERNAME/bin/menu
 
 }

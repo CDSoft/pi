@@ -24,17 +24,13 @@
 
 install_mega()
 {
-    $MEGA || return
+    [ -n "$MEGA" ] || return
     $FORCE || ! [ -x /usr/bin/megasync ] || return
 
     title "Install Mega"
-    (
-        cd /tmp
-        $X86_64 && MEGADEB=https://mega.nz/linux/MEGAsync/Debian_8.0/amd64/megasync-Debian_8.0_amd64.deb
-        $X86    && MEGADEB=https://mega.nz/linux/MEGAsync/Debian_8.0/i386/megasync-Debian_8.0_i386.deb
-        wget $MEGADEB
-        dpkg -i $(basename $MEGADEB)
-    )
+    cd /tmp
+    wget "$MEGA"
+    dpkg -i $(basename "$MEGA")
 }
 
 install_mega

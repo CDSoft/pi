@@ -89,7 +89,7 @@ EOF
     # Additionnal repositories
     add_rep multimedia "deb http://www.deb-multimedia.org $DISTRIB main non-free"
     add_rep multimedia "deb http://www.deb-multimedia.org $DISTRIB-backports main non-free"
-    add_rep mozilla "deb http://mozilla.debian.net/ $DISTRIB-backports firefox-release"
+    #add_rep mozilla "deb http://mozilla.debian.net/ $DISTRIB-backports firefox-release"
     if $XCAS
     then
         add_rep xcas "deb http://www-fourier.ujf-grenoble.fr/~parisse/debian/ stable main"
@@ -142,8 +142,9 @@ package_list()
     add preload
     add_backport wireless-tools wpasupplicant firmware-iwlwifi
     #add_backport wicd
-    $X86_64 && add_backport linux-image-amd64
-    $X86    && add_backport linux-image-i386
+    $I64 && add_backport linux-image-amd64
+    $I32 && add_backport linux-image-i386
+    $RPI && add_backport linux-image-rpi
 
     # microcode
     case "$(grep vendor_id /proc/cpuinfo)" in
@@ -185,7 +186,7 @@ package_list()
     $LATEX && add texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-full
     add figlet
     add python-docutils python3-docutils
-    if $X86_64
+    if $I64 || $I32 || [ -n $LIBREOFFICE ]
     then
         add_backport abiword abiword-plugin-grammar abiword-plugin-mathview
         add_backport gnumeric gnumeric-plugins-extra gnumeric-doc
@@ -198,7 +199,7 @@ package_list()
     add iconv convmv
 
     # images
-    if $X86_64
+    if $I64 || $I32
     then
         add_backport gimp
         add_backport scribus inkscape
@@ -207,7 +208,7 @@ package_list()
     fi
 
     # video/music
-    if $X86_64
+    if $I64 || $I32
     then
         add vlc
         add easytag
@@ -224,7 +225,7 @@ package_list()
     add lua5.1 liblua5.1-filesystem0
     add m4
     add nsis mingw32 mingw-w64 libreadline-dev gcc-multilib g++-multilib automake
-    if $X86_64
+    if $I64 || $I32
     then
         add codeblocks codeblocks-contrib
     fi
@@ -237,19 +238,15 @@ package_list()
     add_backport pkg-config ncurses-dev
     add adlint splint
     add libwxgtk3.0-dev libwxgtk-webview3.0-dev libwxgtk-media3.0-dev
-    if $X86_64
-    then
-        add meld
-    fi
+    add meld
 
     # web
     add wget gftp xsltproc
     add wput
     add curl
     add_backport tidy
-    if $X86_64
+    if $I64 || $I32
     then
-        add_backport firefox firefox-l10n-fr
         add_backport icedove icedove-l10n-fr
         add chromium
     fi
@@ -258,17 +255,17 @@ package_list()
     add fortunes fortunes-bofh-excuses fortunes-fr fortunes-min
 
     # wine
-    if $X86_64
+    if $I64 || $I32
     then
         add wine winetricks
-        $X86_64 && dpkg --add-architecture i386 && add wine32
+        $I64 && dpkg --add-architecture i386 && add wine32
     fi
 
     # i3
     add_backport i3
 
     # Mega
-    $MEGA && add libc-ares2 libcrypto++9
+    [ -n "$MEGA" ] && add libc-ares2 libcrypto++9
 
     # Xcas
     if $XCAS

@@ -37,14 +37,12 @@ load_default_configuration()
 {
     log "Load default configuration"
 
-    # Debug mode (single terminal, single thread)
-    DEBUG_MODE=false
-
     # Force installation of everything everytimes
     FORCE=false
 
     AUTOLOGIN=true
     AUTOSTARTX=true
+    KEYBOARD=${LANG:0:2}
 
     XFLUX="-l 43.6042600 -g 1.4436700 -k 2000"
 
@@ -54,9 +52,9 @@ load_default_configuration()
     RUST=
     ATOM=
     LIBREOFFICE=
-    DROPBOX=false
-    HUBIC=false
-    MEGA=false
+    DROPBOX=
+    HUBIC=
+    MEGA=
 
     # let SSD be true if you have a SSD or if you want to use the RAM to optimize temporary directories
     SSD=true
@@ -85,14 +83,33 @@ load_default_configuration()
     )
 
     # Platform specific configurations
-    if $X86_64
+    if $I64
     then
         LATEX=true
         HASKELL_PLATFORM=https://haskell.org/platform/download/7.10.3/haskell-platform-7.10.3-unknown-posix-x86_64.tar.gz
         RUST=https://static.rust-lang.org/rustup.sh
-        ATOM=https://atom-installer.github.com/v1.5.4/atom-amd64.deb
-        LIBREOFFICE=5.0.5
-        DROPBOX=true
+        ATOM=https://atom-installer.github.com/v1.7.3/atom-amd64.deb
+        LIBREOFFICE=5.1.2
+        DROPBOX="https://www.dropbox.com/download?plat=lnx.x86_64"
+        #MEGA="https://mega.nz/linux/MEGAsync/Debian_8.0/amd64/megasync-Debian_8.0_amd64.deb"
+        #HUBIC="http://mir7.ovh.net/ovh-applications/hubic/hubiC-Linux/2.1.0/hubiC-Linux-2.1.0.53-linux.deb"
+        BLUETOOTH=true
+    fi
+    if $I32
+    then
+        LATEX=true
+        HASKELL_PLATFORM=https://haskell.org/platform/download/7.10.3/haskell-platform-7.10.3-unknown-posix-i386.tar.gz
+        RUST=https://static.rust-lang.org/rustup.sh
+        LIBREOFFICE=5.1.2
+        DROPBOX="https://www.dropbox.com/download?plat=lnx.x86"
+        #MEGA="https://mega.nz/linux/MEGAsync/Debian_8.0/i386/megasync-Debian_8.0_i386.deb"
+        #HUBIC="http://mir7.ovh.net/ovh-applications/hubic/hubiC-Linux/2.1.0/hubiC-Linux-2.1.0.53-linux.deb"
+        BLUETOOTH=true
+    fi
+    if $RPI
+    then
+        KEYBOARD=en
+        XFLUX=
         BLUETOOTH=true
     fi
 
@@ -115,14 +132,12 @@ generate_user_configuration()
 # Post install configuration
 # Can be safely modified
 
-# Debug mode (single terminal, single thread)
-DEBUG_MODE=$DEBUG_MODE
-
 # Force installation of everything everytimes
 FORCE=$FORCE
 
 AUTOLOGIN=$AUTOLOGIN
 AUTOSTARTX=$AUTOSTARTX
+KEYBOARD=$KEYBOARD
 
 XFLUX="$XFLUX"
 
@@ -132,9 +147,9 @@ HASKELL_PLATFORM=$HASKELL_PLATFORM
 RUST=$RUST
 ATOM=$ATOM
 LIBREOFFICE=$LIBREOFFICE
-DROPBOX=$DROPBOX
-HUBIC=$HUBIC
-MEGA=$MEGA
+DROPBOX="$DROPBOX"
+HUBIC="$HUBIC"
+MEGA="$MEGA"
 
 # let SSD be true if you have a SSD or if you want to use the RAM to optimize temporary directories
 SSD=$SSD
@@ -162,20 +177,17 @@ load_user_configuration()
 {
     log "Load user configuration"
     . /home/$USERNAME/$PIRC
-
-    # Force debug mode when no X display is available
-    if ! xterm -iconic -e exit
-    then
-        DEBUG_MODE=true
-    fi
 }
 
 hardware_detection()
 {
-    X86_64=false
-    X86=false
+    I64=false
+    I32=false
+    RPI=false
     case "$(uname -m)" in
-        x86_64)     X86_64=true;;
+        x86_64)     I64=true ;; # 64 bit Intel
+        i686)       I32=true ;; # 32 bit Intel
+        arm*)       RPI=true ;; # ARM (assumed to be a Raspberry pi)
         *)          error "Unknown architecture" ;;
     esac
 }

@@ -64,7 +64,7 @@ Win+Space           start a small and faster menu
 
 Win+Return          terminal (in the current working directory)
 Win+Ctrl+Return     Double Commander
-Win+Alt+Return      File manager menu (mc, dc, PCManFM)
+Win+Alt+Return      File manager menu (mc, doublecmd, PCManFM)
 
 Win+t               edit the TODO list
 Win+n               notes
@@ -72,12 +72,12 @@ Win+p               password manager
 Win+= or Win+c      Handy Calc
 
 Win+w               Web browser (chromium)
-Win+Shift+w         Web browser (firefox)
 
 Print               Capture the whole screen and start GIMP
 Win+Print           Capture the active window and start GIMP
 
 EOF
+    $RPI && sed -i '/Handy Calc/d' /home/$USERNAME/.i3/doc1.txt
     cat <<EOF > /home/$USERNAME/.i3/doc2.txt
 
 ===========================================================================

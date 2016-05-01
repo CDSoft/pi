@@ -41,13 +41,14 @@ ssd_optimizations()
 
     # Temporary directory to RAM
     log "RAM optimizations"
+    RAMSIZE=$(($(cat /proc/meminfo | head -1 | awk '{print $2}')/1024/2))m
     cat <<EOF >> /etc/fstab
 
 # SSD optimizations
-tmpfs   /tmp                        tmpfs   defaults,size=2g    0   0
+tmpfs   /tmp                        tmpfs   defaults,size=$RAMSIZE    0   0
 tmpfs   /var/log                    tmpfs   defaults,nosuid,nodev,noatime,mode=0755,size=5%     0   0
-#tmpfs   /var/cache/apt/archives     tmpfs   defaults,size=2g    0    0
-tmpfs   /home/$USERNAME/.cache      tmpfs   defaults,size=1g    0    0
+#tmpfs   /var/cache/apt/archives     tmpfs   defaults,size=$RAMSIZE    0    0
+tmpfs   /home/$USERNAME/.cache      tmpfs   defaults,size=$RAMSIZE    0    0
 # end of optimizations
 EOF
     chmod 644 /etc/fstab

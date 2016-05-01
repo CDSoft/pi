@@ -45,7 +45,7 @@ iface eth0 inet dhcp
 iface wlan0 inet dhcp
 
 EOF
-    chmod 0600 /etc/network/interfaces
+    $RPI && sed -i 's/#auto wlan0/auto wlan0/s' /etc/network/interfaces
     for config in ${SSIDs[@]}
     do
         name=$(echo $config | awk -F "/" '{print $1}')
@@ -58,6 +58,7 @@ iface $name inet dhcp
 
 EOF
     done
+    chmod 0600 /etc/network/interfaces
     #adduser $USERNAME netdev
     #/etc/init.d/dbus reload
     #/etc/init.d/wicd start

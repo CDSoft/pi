@@ -39,7 +39,7 @@ xset -b # disable bell
 #dbus instance
 #eval `dbus-launch --sh-syntax --exit-with-session`
 
-setxkbmap -layout fr
+setxkbmap -layout $KEYBOARD
 #setxkbmap -option ctrl:nocaps
 #xmodmap \$HOME/.Xmodmap
 #xbindkeys
@@ -54,7 +54,7 @@ dunst -key y &
 mkdir -p ~/.pw/
 cp -f ~/secret.pwd ~/.pw/\$(date +%F-secret.pwd)
 
-[ -x ~/bin/coffres.sh ] && ~/bin/coffres.sh
+[ -x ~/bin/coffres.sh ] && ~/bin/coffres.sh &
 
 xflux $XFLUX &
 
@@ -66,9 +66,9 @@ EOF
     echo "exec ck-launch-session dbus-launch i3"    >> /home/$USERNAME/.xinitrc
 
     [ -n "$XFLUX" ] || sed -i '/xflux/d' /home/$USERNAME/.xinitrc
-    $DROPBOX || sed -i '/dropbox/d' /home/$USERNAME/.xinitrc
-    $MEGA || sed -i '/megasync/d' /home/$USERNAME/.xinitrc
-    $HUBIC || sed -i '/hubic/d' /home/$USERNAME/.xinitrc
+    [ -n "$DROPBOX" ] || sed -i '/dropbox/d' /home/$USERNAME/.xinitrc
+    [ -n "$MEGA" ] || sed -i '/megasync/d' /home/$USERNAME/.xinitrc
+    [ -n "$HUBIC" ] || sed -i '/hubic/d' /home/$USERNAME/.xinitrc
     $LAPTOP && sed -i 's/numlockx on/numlockx off/' /home/$USERNAME/.xinitrc
 
     chown $USERNAME:$USERNAME /home/$USERNAME/.xinitrc
