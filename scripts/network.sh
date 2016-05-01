@@ -45,12 +45,13 @@ iface eth0 inet dhcp
 iface wlan0 inet dhcp
 
 EOF
-    $RPI && sed -i 's/#auto wlan0/auto wlan0/s' /etc/network/interfaces
+    #$RPI && sed -i 's/#auto wlan0/auto wlan0/s' /etc/network/interfaces
     for config in ${SSIDs[@]}
     do
         name=$(echo $config | awk -F "/" '{print $1}')
         ssid=$(echo $config | awk -F "/" '{print $2}')
         psk=$(echo $config | awk -F "/" '{print $3}')
+        sed -i "s/#auto wlan0/auto wlan0=$name/" /etc/network/interfaces
         cat <<EOF >> /etc/network/interfaces
 iface $name inet dhcp
     wpa-ssid $ssid

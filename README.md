@@ -12,6 +12,11 @@ It can be in some way tuned for other situations.
 It configures a fresh minimal Debian installation with I3,
 some programming languages and a few other things...
 
+It seems to work on:
+
+- Debian (64 bit)
+- Raspbian (Raspberry Pi 3) *but still very experimental*
+
 Installation
 ============
 

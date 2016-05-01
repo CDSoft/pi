@@ -73,13 +73,13 @@ load_default_configuration()
     # Local network
     SUBNET=192.168.10
     IPs=(
-        NAS=192.168.10.2
-        DESKTOP=192.168.10.10
-        LAPTOP=192.168.10.20
-        LAPTOPWIFI=192.168.10.21
-        PHONE=192.168.10.30
-        RASPI3=192.168.10.40
-        RASPI3WIFI=192.168.10.41
+        NAS=$SUBNET.2
+        DESKTOP=$SUBNET.10
+        LAPTOP=$SUBNET.20
+        LAPTOPWIFI=$SUBNET.21
+        PHONE=$SUBNET.30
+        RASPI3=$SUBNET.40
+        RASPI3WIFI=$SUBNET.41
     )
 
     # Platform specific configurations
@@ -90,9 +90,9 @@ load_default_configuration()
         RUST=https://static.rust-lang.org/rustup.sh
         ATOM=https://atom-installer.github.com/v1.7.3/atom-amd64.deb
         LIBREOFFICE=5.1.2
-        DROPBOX="https://www.dropbox.com/download?plat=lnx.x86_64"
-        #MEGA="https://mega.nz/linux/MEGAsync/Debian_8.0/amd64/megasync-Debian_8.0_amd64.deb"
-        #HUBIC="http://mir7.ovh.net/ovh-applications/hubic/hubiC-Linux/2.1.0/hubiC-Linux-2.1.0.53-linux.deb"
+        DROPBOX=https://www.dropbox.com/download?plat=lnx.x86_64
+        #MEGA=https://mega.nz/linux/MEGAsync/Debian_8.0/amd64/megasync-Debian_8.0_amd64.deb
+        #HUBIC=http://mir7.ovh.net/ovh-applications/hubic/hubiC-Linux/2.1.0/hubiC-Linux-2.1.0.53-linux.deb
         BLUETOOTH=true
     fi
     if $I32
@@ -101,9 +101,9 @@ load_default_configuration()
         HASKELL_PLATFORM=https://haskell.org/platform/download/7.10.3/haskell-platform-7.10.3-unknown-posix-i386.tar.gz
         RUST=https://static.rust-lang.org/rustup.sh
         LIBREOFFICE=5.1.2
-        DROPBOX="https://www.dropbox.com/download?plat=lnx.x86"
-        #MEGA="https://mega.nz/linux/MEGAsync/Debian_8.0/i386/megasync-Debian_8.0_i386.deb"
-        #HUBIC="http://mir7.ovh.net/ovh-applications/hubic/hubiC-Linux/2.1.0/hubiC-Linux-2.1.0.53-linux.deb"
+        DROPBOX=https://www.dropbox.com/download?plat=lnx.x86
+        #MEGA=https://mega.nz/linux/MEGAsync/Debian_8.0/i386/megasync-Debian_8.0_i386.deb
+        #HUBIC=http://mir7.ovh.net/ovh-applications/hubic/hubiC-Linux/2.1.0/hubiC-Linux-2.1.0.53-linux.deb
         BLUETOOTH=true
     fi
     if $RPI
@@ -147,9 +147,9 @@ HASKELL_PLATFORM=$HASKELL_PLATFORM
 RUST=$RUST
 ATOM=$ATOM
 LIBREOFFICE=$LIBREOFFICE
-DROPBOX="$DROPBOX"
-HUBIC="$HUBIC"
-MEGA="$MEGA"
+DROPBOX=$DROPBOX
+HUBIC=$HUBIC
+MEGA=$MEGA
 
 # let SSD be true if you have a SSD or if you want to use the RAM to optimize temporary directories
 SSD=$SSD

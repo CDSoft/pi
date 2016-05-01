@@ -58,10 +58,13 @@ if [ -d "$HOME/local/bin" ] ; then
 fi
 export PATH=$PATH:.
 
-for profile in $HOME/.profiled/*
-do
-    source $profile
-done
+if [ -d "$HOME/.profiled ]
+then
+    for profile in $HOME/.profiled/*
+    do
+        source $profile
+    done
+fi
 EOF
 
     chown $USERNAME:$USERNAME /home/$USERNAME/.profile
