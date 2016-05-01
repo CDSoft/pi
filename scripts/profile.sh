@@ -58,7 +58,7 @@ if [ -d "$HOME/local/bin" ] ; then
 fi
 export PATH=$PATH:.
 
-if [ -d "$HOME/.profiled ]
+if [ -d "$HOME/.profiled" ]
 then
     for profile in $HOME/.profiled/*
     do
