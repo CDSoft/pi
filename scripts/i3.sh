@@ -626,7 +626,7 @@ case $(awk '$1 ~ /\)$/ {print substr($1,1,length($1)-1)}' $0 | dmenu -i -b -p Me
 esac
 EOF
     which simple-scan > /dev/null || sed -i '/simple-scan/d' /home/$USERNAME/bin/menu
-    which libreoffice > /dev/null || sed -i '/libreoffice/d' /home/$USERNAME/bin/menu
+    $[ -n "$LIBREOFFICE" ] || sed -i '/libreoffice/d' /home/$USERNAME/bin/menu
     if $I32 || $RPI
     then
         sed -i '/icedove/d' /home/$USERNAME/bin/menu
