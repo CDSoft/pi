@@ -44,6 +44,8 @@ load_default_configuration()
     AUTOSTARTX=true
     KEYBOARD=${LANG:0:2}
 
+    TIMEZONE=Europe/Paris
+
     XFLUX="-l 43.6042600 -g 1.4436700 -k 2000"
 
     LATEX=false
@@ -138,6 +140,9 @@ FORCE=$FORCE
 AUTOLOGIN=$AUTOLOGIN
 AUTOSTARTX=$AUTOSTARTX
 KEYBOARD=$KEYBOARD
+
+# TIMEZONE shall be a file located in /usr/share/zoneinfo
+TIMEZONE=$TIMEZONE
 
 XFLUX="$XFLUX"
 

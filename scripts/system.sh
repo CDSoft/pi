@@ -95,8 +95,16 @@ config_fuse()
     adduser $USERNAME fuse
 }
 
+config_timezone()
+{
+    [ -n "$TIMEZONE" ] || return
+    log "Timezone setup"
+    cp -v /usr/share/zoneinfo/$TIMEZONE /etc/localtime
+}
+
 config_sudoers
 config_swappiness
 config_system_beep
 config_mtp
 config_fuse
+config_timezone
