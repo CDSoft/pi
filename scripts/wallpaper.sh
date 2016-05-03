@@ -77,7 +77,7 @@ Print               Capture the whole screen and start GIMP
 Win+Print           Capture the active window and start GIMP
 
 EOF
-    $RPI && sed -i '/Handy Calc/d' /home/$USERNAME/.i3/doc1.txt
+    $I64 || sed -i '/Handy Calc/d' /home/$USERNAME/.i3/doc1.txt
     cat <<EOF > /home/$USERNAME/.i3/doc2.txt
 
 ===========================================================================
