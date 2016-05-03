@@ -44,7 +44,7 @@ setxkbmap -layout $KEYBOARD
 #xmodmap \$HOME/.Xmodmap
 #xbindkeys
 
-numlockx on
+numlockx $( ( laptop-detect || $RPI ) && echo off || echo on )
 #alsactl init &
 
 # Notifications
@@ -56,21 +56,16 @@ cp -f ~/secret.pwd ~/.pw/\$(date +%F-secret.pwd)
 
 [ -x ~/bin/coffres.sh ] && ~/bin/coffres.sh &
 
-xflux $XFLUX &
+$( [ -n "$XFLUX" ]      && echo "xflux $XFLUX &" )
 
-~/.dropbox-dist/dropboxd &
-megasync > /tmp/megasync.log &
-( [ -x ~/hubic.login ] && ~/hubic.login; hubic start ) &
+$( [ -n "$DROPBOX" ]    && echo "~/.dropbox-dist/dropboxd &" )
+$( [ -n "$MEGA" ]       && echo "megasync > /tmp/megasync.log &" )
+$( [ -n "$HUBIC" ]      && echo "( [ -x ~/hubic.login ] && ~/hubic.login; hubic start ) &" )
+
+$( $BLUETOOTH && echo "blueman-applet &" )
+
+exec ck-launch-session dbus-launch i3
 EOF
-    $BLUETOOTH && echo "blueman-applet &" >> /home/$USERNAME/.xinitrc
-    echo "exec ck-launch-session dbus-launch i3"    >> /home/$USERNAME/.xinitrc
-
-    [ -n "$XFLUX" ] || sed -i '/xflux/d' /home/$USERNAME/.xinitrc
-    [ -n "$DROPBOX" ] || sed -i '/dropbox/d' /home/$USERNAME/.xinitrc
-    [ -n "$MEGA" ] || sed -i '/megasync/d' /home/$USERNAME/.xinitrc
-    [ -n "$HUBIC" ] || sed -i '/hubic/d' /home/$USERNAME/.xinitrc
-    $LAPTOP && sed -i 's/numlockx on/numlockx off/' /home/$USERNAME/.xinitrc
-
     chown $USERNAME:$USERNAME /home/$USERNAME/.xinitrc
 
 }
