@@ -26,7 +26,6 @@ configure_autofs()
 {
     rm -f /etc/auto.master /etc/auto.nfs
     [ -n $NAS_MOUNTPOINT ] || return
-    [ -n $NAS_IP ] || return
 
     title "autofs configuration"
 
@@ -35,12 +34,10 @@ configure_autofs()
 $NAS_MOUNTPOINT    /etc/auto.nfs   --ghost,--timeout=60
 EOF
         cat <<EOF > /etc/auto.nfs
-Archives    -fstype=nfs,rw,intr     $NAS_IP:/volume1/Archives
-EOF
-        cat <<EOF >> /etc/auto.nfs
-backup      -fstype=nfs,rw,intr     $NAS_IP:/volume1/backup
-Nuage       -fstype=nfs,rw,intr     $NAS_IP:/volume1/Nuage
-perso       -fstype=nfs,rw,intr     $NAS_IP:/volume1/perso
+Archives    -fstype=nfs,rw,intr     nas:/volume1/Archives
+backup      -fstype=nfs,rw,intr     nas:/volume1/backup
+Nuage       -fstype=nfs,rw,intr     nas:/volume1/Nuage
+perso       -fstype=nfs,rw,intr     nas:/volume1/perso
 EOF
     service autofs restart
 }
