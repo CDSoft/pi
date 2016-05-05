@@ -55,16 +55,15 @@ title "Post Install"
 
 . scripts/configuration.sh
 
-while [ -n "$1" ]
+while getopts ":f" opt
 do
-    case "$1" in
-        -f)     FORCE=true
-                shift
-                ;;
-        *)      error "unknown option: $1"
-                ;;
+    case $opt in
+        f)  FORCE=true;;
+        \?) error "Invalid option: -$OPTARG";;
+        :)  error "Option -$OPTARG requires an argument.";;
     esac
 done
+shift $((OPTIND-1))
 
 run_script packages
 run_script profile
