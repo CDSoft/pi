@@ -24,7 +24,7 @@
 
 install_ocaml()
 {
-    [ -n "$HASKELL_PLATFORM" ] || return
+    $OCAML || return
 
     title "Install Ocaml with opam"
     # Ocaml libraries (opam + https://opam.ocaml.org/packages/)

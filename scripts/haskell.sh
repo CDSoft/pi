@@ -24,6 +24,11 @@
 
 install_haskell()
 {
+    $HASKELL || return
+
+    $I64 && HASKELL_PLATFORM=https://haskell.org/platform/download/7.10.3/haskell-platform-7.10.3-unknown-posix-x86_64.tar.gz
+    $I32 && HASKELL_PLATFORM=https://haskell.org/platform/download/7.10.3/haskell-platform-7.10.3-unknown-posix-i386.tar.gz
+
     [ -n "$HASKELL_PLATFORM" ] || return
 
     title "Install Haskell"

@@ -24,12 +24,12 @@
 
 install_rust()
 {
-    [ -n "$RUST" ] || return
+    $RUST || return
 
     if $FORCE || ! [ -x /usr/local/bin/rustc ]
     then
         title "Install Rust"
-        curl -sSf $RUST | sh
+        curl -sSf https://static.rust-lang.org/rustup.sh | sh
     fi
 }
 

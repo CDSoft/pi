@@ -24,8 +24,10 @@
 
 install_libreoffice()
 {
-    [ -n "$LIBREOFFICE" ] || return
+    $OFFICE || return
     $I64 || $I32 || return
+
+    LIBREOFFICE=5.1.2
 
     if $FORCE || ! [ -x /usr/local/bin/libreoffice* ]
     then

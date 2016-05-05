@@ -186,7 +186,7 @@ package_list()
     $LATEX && add texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-full
     add figlet
     add python-docutils python3-docutils
-    if ( $I64 || $I32 ) && [ -n $LIBREOFFICE ]
+    if ( $I64 || $I32 ) && $OFFICE
     then
         add_backport abiword abiword-plugin-grammar abiword-plugin-mathview
         add_backport gnumeric gnumeric-plugins-extra gnumeric-doc
@@ -265,7 +265,7 @@ package_list()
     add_backport i3
 
     # Mega
-    [ -n "$MEGA" ] && add libc-ares2 libcrypto++9
+    $MEGA && add libc-ares2 libcrypto++9
 
     # Xcas
     if $XCAS

@@ -24,14 +24,18 @@
 
 install_atom()
 {
-    [ -n "$ATOM" ] || return
+    $ATOM || return
+
+    $I64 && ATOMDEB=https://atom-installer.github.com/v1.7.3/atom-amd64.deb
+
+    [ -n "$ATOMDEB" ] || return
 
     if $FORCE || ! [ -x /usr/bin/atom ]
     then
         title "Install Atom"
         cd /tmp
-        wget "$ATOM"
-        sudo dpkg -i $(basename "$ATOM")
+        wget "$ATOMDEB"
+        sudo dpkg -i $(basename "$ATOMDEB")
     fi
 }
 

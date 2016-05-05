@@ -50,13 +50,14 @@ load_default_configuration()
 
     LATEX=false
     XCAS=false
-    HASKELL_PLATFORM=
-    RUST=
-    ATOM=
-    LIBREOFFICE=
-    DROPBOX=
-    HUBIC=
-    MEGA=
+    HASKELL=false
+    OCAML=false
+    RUST=false
+    ATOM=false
+    OFFICE=false
+    DROPBOX=false
+    HUBIC=false
+    MEGA=false
 
     # let SSD be true if you have a SSD or if you want to use the RAM to optimize temporary directories
     SSD=true
@@ -88,24 +89,26 @@ load_default_configuration()
     if $I64
     then
         LATEX=true
-        HASKELL_PLATFORM=https://haskell.org/platform/download/7.10.3/haskell-platform-7.10.3-unknown-posix-x86_64.tar.gz
-        RUST=https://static.rust-lang.org/rustup.sh
-        ATOM=https://atom-installer.github.com/v1.7.3/atom-amd64.deb
-        LIBREOFFICE=5.1.2
-        DROPBOX=https://www.dropbox.com/download?plat=lnx.x86_64
-        #MEGA=https://mega.nz/linux/MEGAsync/Debian_8.0/amd64/megasync-Debian_8.0_amd64.deb
-        #HUBIC=http://mir7.ovh.net/ovh-applications/hubic/hubiC-Linux/2.1.0/hubiC-Linux-2.1.0.53-linux.deb
+        HASKELL=true
+        OCAML=true
+        RUST=true
+        ATOM=true
+        OFFICE=true
+        DROPBOX=true
+        #MEGA=true
+        #HUBIC=true
         BLUETOOTH=true
     fi
     if $I32
     then
         LATEX=true
-        HASKELL_PLATFORM=https://haskell.org/platform/download/7.10.3/haskell-platform-7.10.3-unknown-posix-i386.tar.gz
-        RUST=https://static.rust-lang.org/rustup.sh
-        LIBREOFFICE=5.1.2
-        DROPBOX=https://www.dropbox.com/download?plat=lnx.x86
-        #MEGA=https://mega.nz/linux/MEGAsync/Debian_8.0/i386/megasync-Debian_8.0_i386.deb
-        #HUBIC=http://mir7.ovh.net/ovh-applications/hubic/hubiC-Linux/2.1.0/hubiC-Linux-2.1.0.53-linux.deb
+        HASKELL=true
+        OCAML=true
+        RUST=true
+        OFFICE=true
+        DROPBOX=true
+        #MEGA=true
+        #HUBIC=true
         BLUETOOTH=true
     fi
     if $RPI
@@ -148,10 +151,10 @@ XFLUX="$XFLUX"
 
 LATEX=$LATEX
 XCAS=$XCAS
-HASKELL_PLATFORM=$HASKELL_PLATFORM
+HASKELL=$HASKELL
 RUST=$RUST
 ATOM=$ATOM
-LIBREOFFICE=$LIBREOFFICE
+OFFICE=$OFFICE
 DROPBOX=$DROPBOX
 HUBIC=$HUBIC
 MEGA=$MEGA
@@ -192,7 +195,7 @@ hardware_detection()
     case "$(uname -m)" in
         x86_64)     I64=true ;; # 64 bit Intel
         i686)       I32=true ;; # 32 bit Intel
-        arm*)       RPI=true ;; # ARM (assumed to be a Raspberry pi)
+        arm*)       RPI=true ;; # ARM (assumed to be a Raspberry Pi)
         *)          error "Unknown architecture" ;;
     esac
 }

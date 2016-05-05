@@ -24,12 +24,18 @@
 
 install_dropbox()
 {
-    [ -n "$DROPBOX" ] || return
+    $DROPBOX || return
+
+    $I64 && DROPBOXINSTALL=https://www.dropbox.com/download?plat=lnx.x86_64
+    $I32 && DROPBOXINSTALL=https://www.dropbox.com/download?plat=lnx.x86
+
+    [ -n "$DROPBOXINSTALL" ] || return
+
     $FORCE || ! [ -x /home/$USERNAME/.dropbox-dist/dropboxd ] || return
 
     title "Install Dropbox"
     cd /home/$USERNAME
-    wget -O - "$DROPBOX" | tar xzf -
+    wget -O - "$DROPBOXINSTALL" | tar xzf -
 }
 
 install_dropbox

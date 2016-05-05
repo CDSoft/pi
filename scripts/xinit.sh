@@ -56,11 +56,11 @@ cp -f ~/secret.pwd ~/.pw/\$(date +%F-secret.pwd)
 
 [ -x ~/bin/coffres.sh ] && ~/bin/coffres.sh &
 
-$( [ -n "$XFLUX" ]      && echo "xflux $XFLUX &" )
+$( [ -n "$XFLUX" ]  && echo "xflux $XFLUX &" )
 
-$( [ -n "$DROPBOX" ]    && echo "~/.dropbox-dist/dropboxd &" )
-$( [ -n "$MEGA" ]       && echo "megasync > /tmp/megasync.log &" )
-$( [ -n "$HUBIC" ]      && echo "( [ -x ~/hubic.login ] && ~/hubic.login; hubic start ) &" )
+$( $DROPBOX && echo "~/.dropbox-dist/dropboxd &" )
+$( $MEGA    && echo "megasync > /tmp/megasync.log &" )
+$( $HUBIC   && echo "( [ -x ~/hubic.login ] && ~/hubic.login; hubic start ) &" )
 
 $( $BLUETOOTH && echo "blueman-applet &" )
 
