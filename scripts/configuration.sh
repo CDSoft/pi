@@ -79,10 +79,10 @@ load_default_configuration()
         NAS=$SUBNET.2
         DESKTOP=$SUBNET.10
         LAPTOP=$SUBNET.20
-        LAPTOPWIFI=$SUBNET.21
+        LAPTOPETH=$SUBNET.21
         PHONE=$SUBNET.30
-        RASPI3=$SUBNET.40
-        RASPI3WIFI=$SUBNET.41
+        RPI=$SUBNET.40
+        RPIETH=$SUBNET.41
     )
 
     # Platform specific configurations
