@@ -15,7 +15,10 @@ some programming languages and a few other things...
 It seems to work on:
 
 - Debian (64 bit)
-- Raspbian (Raspberry Pi 3) *but still very experimental*
+- Raspbian (on a Raspberry Pi 3) *but still very experimental*
+
+**Caution**: make backups, read carefully and understand the source code before running this script.
+You have been warned ;-)
 
 Installation
 ============
@@ -34,4 +37,4 @@ The configuration file `.pirc` is a single bash script used to configure [Post I
 Documentation
 =============
 
-No documentation written yet. Watch the source Luke!
+No documentation written yet. *Use the source, Luke!*
