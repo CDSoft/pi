@@ -29,10 +29,11 @@ install_libreoffice()
 
     LIBREOFFICE=5.1.2
 
-    if $FORCE || ! [ -x /usr/bin/libreoffice ]
+    if $FORCE || ! [ -x /usr/bin/libreoffice*.* ]
     then
         title "Install Libre Office"
         rm -f /usr/local/bin/libreoffice*
+        rm -f /usr/bin/libreoffice*
         rm -rf /opt/libreoffice*
         cd /tmp
         case `uname -m` in
