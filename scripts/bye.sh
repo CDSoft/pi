@@ -44,8 +44,8 @@ CPU_THR = 0.5
 
 MENU = [
     #("Suspend", "bash -c '(cd /tmp; nohup i3lock -i ~/.i3/locked.png )& sudo pm-hibernate'"),
-    ("Suspend", "sudo pm-hibernate"),
     ("Halt",    "sudo /sbin/shutdown -h now"),
+    ("Suspend", "sudo pm-hibernate"),
     ("Reboot",  "sudo /sbin/shutdown -r now"),
     ("Cancel",  None),
 ]
