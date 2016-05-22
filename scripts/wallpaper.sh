@@ -135,7 +135,15 @@ EOF
             esac ;;
     esac > /tmp/quote.txt
 
-    local XxY=$(xrandr | grep "Screen 0" | sed 's/.*current \(.*\) x \(.*\),.*/\1x\2/')
+    local XxY=$(xrandr 2>/dev/null | grep "Screen 0" | sed 's/.*current \(.*\) x \(.*\),.*/\1x\2/')
+    if [ -z $XxY ]
+        if laptop-detect
+        then
+            XxY=1366x768
+        else
+            XxY=1920x1080
+        fi
+    fi
 
     python - <<EOF > /tmp/doc.txt
 left = open("/home/$USERNAME/.i3/doc1.txt").read().splitlines()
