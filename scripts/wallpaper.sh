@@ -137,6 +137,7 @@ EOF
 
     local XxY=$(xrandr 2>/dev/null | grep "Screen 0" | sed 's/.*current \(.*\) x \(.*\),.*/\1x\2/')
     if [ -z $XxY ]
+    then
         if laptop-detect
         then
             XxY=1366x768
