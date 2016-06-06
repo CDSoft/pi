@@ -168,9 +168,10 @@ EOF
     else
         SIZE=14
     fi
-    cat /tmp/doc.txt   | convert -size ${XxY} -background black -fill green -font FreeMono-Gras          -pointsize  $((1*SIZE)) -gravity NorthWest label:@- /tmp/doc.png
-    cat /tmp/quote.txt | convert -size ${XxY} -background black -fill blue  -font FreeMono-Gras-Italique -pointsize  $((2*SIZE)) -gravity SouthEast label:@- /tmp/quote.png
-    echo "LOCKED"      | convert -size ${XxY} -background black -fill red   -font FreeMono-Gras          -pointsize          216 -gravity NorthWest label:@- -rotate 30 /tmp/locked.png
+    sed -i 's/<\(policy .*pattern="@\*".*\)\/>/<!-- \1 -->/' /etc/ImageMagick-6/policy.xml
+    convert -size ${XxY} -background black -fill green -font FreeMono-Gras          -pointsize  $((1*SIZE)) -gravity NorthWest label:@/tmp/doc.txt /tmp/doc.png
+    convert -size ${XxY} -background black -fill blue  -font FreeMono-Gras-Italique -pointsize  $((2*SIZE)) -gravity SouthEast label:@/tmp/quote.txt /tmp/quote.png
+    convert -size ${XxY} -background black -fill red   -font FreeMono-Gras          -pointsize          216 -gravity NorthWest label:LOCKED -rotate 30 /tmp/locked.png
     if laptop-detect
     then
         cp /tmp/doc.png /home/$USERNAME/.i3/wallpaper.png
