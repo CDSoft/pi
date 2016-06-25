@@ -89,7 +89,7 @@ EOF
     # Additionnal repositories
     add_rep multimedia "deb http://www.deb-multimedia.org $DISTRIB main non-free"
     add_rep multimedia "deb http://www.deb-multimedia.org $DISTRIB-backports main non-free"
-    #add_rep mozilla "deb http://mozilla.debian.net/ $DISTRIB-backports firefox-release"
+    add_rep mozilla "deb http://mozilla.debian.net/ $DISTRIB-backports firefox-release"
     if $XCAS
     then
         add_rep xcas "deb http://www-fourier.ujf-grenoble.fr/~parisse/debian/ stable main"
@@ -248,6 +248,7 @@ package_list()
     if $I64 || $I32
     then
         add_backport icedove icedove-l10n-fr
+        add firefox
         add chromium
     fi
 
