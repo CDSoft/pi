@@ -26,8 +26,8 @@ install_haskell()
 {
     $HASKELL || return
 
-    $I64 && HASKELL_PLATFORM=https://haskell.org/platform/download/7.10.3/haskell-platform-7.10.3-unknown-posix-x86_64.tar.gz
-    $I32 && HASKELL_PLATFORM=https://haskell.org/platform/download/7.10.3/haskell-platform-7.10.3-unknown-posix-i386.tar.gz
+    $I64 && HASKELL_PLATFORM=https://haskell.org/platform/download/8.0.1/haskell-platform-8.0.1-unknown-posix--minimal-x86_64.tar.gz
+    $I32 && HASKELL_PLATFORM=https://haskell.org/platform/download/8.0.1/haskell-platform-8.0.1-unknown-posix--minimal-i386.tar.gz
 
     [ -n "$HASKELL_PLATFORM" ] || return
 
@@ -62,9 +62,7 @@ EOF
         network-multicast \
         base-unicode-symbols \
         utf8-string \
-        interpolatedstring-perl6 shakespeare-text here \
-        reactive-banana reactive-banana-wx \
-        sox
+        interpolatedstring-perl6 shakespeare-text here
 
     log "Install Pandoc with cabal"
     mkcd /home/$USERNAME/.haskell/pandoc
