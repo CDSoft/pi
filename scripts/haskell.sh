@@ -46,9 +46,10 @@ install_haskell()
     cat <<\EOF > /home/$USERNAME/.profiled/haskell.sh
 # Haskell
 export PATH=~/.cabal/bin:$PATH
-export PATH=~/.haskell/ghcmod/.cabal-sandbox/bin:$PATH
-export PATH=~/.haskell/shellcheck/.cabal-sandbox/bin:$PATH
-export PATH=~/.haskell/pandoc/.cabal-sandbox/bin:$PATH
+for mod in pandoc ghcmod shellcheck
+do
+    export PATH=~/.haskell/$mod/.cabal-sandbox/bin:$PATH
+done
 EOF
     perm ux /home/$USERNAME/.profiled
 
@@ -62,7 +63,8 @@ EOF
         network-multicast \
         base-unicode-symbols \
         utf8-string \
-        interpolatedstring-perl6 shakespeare-text here
+        interpolatedstring-perl6 shakespeare-text here \
+        glut
 
     log "Install Pandoc with cabal"
     mkcd /home/$USERNAME/.haskell/pandoc
@@ -74,7 +76,7 @@ EOF
     mkcd /home/$USERNAME/.haskell/ghcmod
     sudo -u $USERNAME cabal sandbox init
     sudo -u $USERNAME cabal update
-    sudo -u $USERNAME cabal install ghc-mod stylish-haskell
+    sudo -u $USERNAME cabal install hlint stylish-haskell ghc-mod
 
     log "Install shellcheck"
     mkcd /home/$USERNAME/.haskell/shellcheck

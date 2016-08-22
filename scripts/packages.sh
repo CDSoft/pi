@@ -223,6 +223,7 @@ package_list()
     # programming
     add python3 python3-tk git-core git-gui
     add lua5.1 liblua5.1-filesystem0
+    add libglfw-dev
     add m4
     add nsis mingw32 mingw-w64 libreadline-dev gcc-multilib g++-multilib automake
     if $I64 || $I32

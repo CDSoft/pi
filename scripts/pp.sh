@@ -32,10 +32,10 @@ install_pp()
     title "Install PP"
     mkcd /tmp/pp
     wget http://cdsoft.fr/pp/pp.tgz
-    tar xzf pp.tgz
-    make pp dpp
+    sudo -u $USERNAME tar xzf pp.tgz
+    sudo -u $USERNAME make pp
     mkdir -p /home/$USERNAME/bin
-    cp pp dpp /home/$USERNAME/bin/
+    cp pp /home/$USERNAME/bin/
 }
 
 install_pp
