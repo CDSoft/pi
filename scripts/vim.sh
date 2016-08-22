@@ -29,8 +29,6 @@ configure_vim()
     cat <<\EOF > /home/$USERNAME/.vimrc
 " Vim configuration
 
-" TODO : grep, vimgrep
-
 " Startup {{{
 set nocompatible " use vim power
 set loadplugins
