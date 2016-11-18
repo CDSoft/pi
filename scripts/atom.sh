@@ -26,7 +26,7 @@ install_atom()
 {
     $ATOM || return
 
-    $I64 && ATOMDEB=https://atom-installer.github.com/v1.9.9/atom-amd64.deb
+    $I64 && ATOMDEB=https://github.com/atom/atom/releases/download/v1.12.4/atom-amd64.deb
 
     [ -n "$ATOMDEB" ] || return
 
