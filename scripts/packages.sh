@@ -97,6 +97,12 @@ EOF
     else
         rem_rep xcas
     fi
+    # Elixir/Erlang
+    add_rep erlang "deb http://binaries.erlang-solutions.com/debian $DISTRIB contrib"
+    (   cd /tmp
+        wget https://packages.erlang-solutions.com/debian/erlang_solutions.asc
+        apt-key add erlang_solutions.asc
+    )
 
     # Double Commander
     add_rep doublecmd "deb http://download.opensuse.org/repositories/home:/Alexx2000/Debian_7.0/ /"
@@ -197,6 +203,7 @@ package_list()
     fi
     add dos2unix
     add iconv convmv
+    add tmux
 
     # images
     if $I64 || $I32
@@ -240,6 +247,7 @@ package_list()
     add adlint splint
     add libwxgtk3.0-dev libwxgtk-webview3.0-dev libwxgtk-media3.0-dev
     add meld
+    add esl-erlang elixir
 
     # web
     add wget gftp xsltproc

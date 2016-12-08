@@ -64,7 +64,8 @@ EOF
         base-unicode-symbols \
         utf8-string \
         interpolatedstring-perl6 shakespeare-text here \
-        glut
+        glut \
+        parallel
 
     log "Install Pandoc with cabal"
     mkcd /home/$USERNAME/.haskell/pandoc
