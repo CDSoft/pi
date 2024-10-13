@@ -1,6 +1,11 @@
 Post Install
 ============
 
+> [!WARNING]
+> This repository is no longer maintained and has been archived.
+>
+> Please consider using [rrpi](https://github.com/CDSoft/rrpi) or [fu](https://github.com/CDSoft/fu) instead.
+
 [PI]: http://cdsoft.fr/pi
 [Post Install]: http://cdsoft.fr/pi
 
